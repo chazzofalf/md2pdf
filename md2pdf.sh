@@ -2,8 +2,9 @@
 # Wrapper script to activate the project's virtual environment and run md2pdf.py
 # Works regardless of the current working directory from which the script is invoked.
 
-# Resolve the directory where this script resides
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Resolve the directory where this script resides, following symlinks
+SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(cd "$(dirname "$SCRIPT_PATH")" && pwd)"
 
 # Path to the virtual environment
 VENV_DIR="${SCRIPT_DIR}/.venv"
